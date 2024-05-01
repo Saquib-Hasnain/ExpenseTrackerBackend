@@ -36,5 +36,5 @@ Welcome to the Expense Tracker GitHub repository. This application is designed t
 1. **Clone the repository:**
 
    ```bash
-   git clone 
+   git clone -https://github.com/Saquib-Hasnain/ExpenseTrackerBackend.git
    cd expense-tracker
