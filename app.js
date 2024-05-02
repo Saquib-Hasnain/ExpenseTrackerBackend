@@ -1,6 +1,11 @@
 const express = require("express")
 const app = express()
 const cors = require("cors")
+const dotenv = require('dotenv');
+dotenv.config();
+const helmet = require('helmet')
+app.use(helmet())
+
 const bodyParser = require("body-parser");
 const sequelize = require("./util/database")
 const userRouter = require("./routes/user")
@@ -8,9 +13,7 @@ const expenseRouter = require("./routes/expense")
 const purchaseRoutes = require('./routes/purchase')
 const premiumFeatureRoutes = require('./routes/premiumFeature')
 const forgetpasswordRoutes = require("./routes/forgetpassword")
-const dotenv = require('dotenv');
-dotenv.config();
-const helmet = require('helmet')
+
 
 
 
@@ -28,7 +31,6 @@ app.use('/expense', expenseRouter)
 app.use('/purchase', purchaseRoutes)
 app.use('/premium', premiumFeatureRoutes)
 app.use('/password', forgetpasswordRoutes)
-app.use(helmet())
 
 
 
