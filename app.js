@@ -1,10 +1,42 @@
+
 const express = require("express")
 const app = express()
+const path = require('path');
+
 const cors = require("cors")
+
+
+app.use(cors())
+
+
 const dotenv = require('dotenv');
 dotenv.config();
-const helmet = require('helmet')
-app.use(helmet())
+const helmet = require('helmet');
+
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"], // Default fallback for most directives
+      scriptSrc: [
+        "'self'", 
+        "https://cdnjs.cloudflare.com", 
+        "https://checkout.razorpay.com", 
+        "https://api.razorpay.com" // Assuming Razorpay scripts are loaded from here
+      ],
+      frameSrc: [
+        "'self'", 
+        "https://api.razorpay.com" // Allow iframes from Razorpay
+      ],
+      connectSrc: [
+        "'self'", 
+        "https://api.razorpay.com" // Allow connections (AJAX, WebSockets) to Razorpay API
+        
+      ],
+      // Add other resource-specific directives as necessary
+    }
+  },
+  // Other Helmet configuration options...
+}));
 
 const bodyParser = require("body-parser");
 const sequelize = require("./util/database")
@@ -22,15 +54,30 @@ const Expense = require('./models/expense');
 const Order = require('./models/order');
 const Forgotpassword = require('./models/forgetpassword');
 const FileUrlModel = require('./models/fileUrl')
+app.use(express.json());
 
+app.use(express.urlencoded({ extended: true }));
 
-app.use(cors())
-app.use(bodyParser.json());
 app.use('/user', userRouter);
 app.use('/expense', expenseRouter)
 app.use('/purchase', purchaseRoutes)
 app.use('/premium', premiumFeatureRoutes)
 app.use('/password', forgetpasswordRoutes)
+/**app.use(express.static(path.join(__dirname, 'views'), {
+  index: false, // Prevent directory listing
+  extensions: ['html', 'js'] // Only serve .html or .js files
+}));**/
+app.use(express.static('views'));
+
+
+
+//app.use(express.static(path.join(__dirname, 'views')));
+/**app.use((req,res)=>{
+    console.log("url--",req.url)
+    res.sendFile(path.join(__dirname, `views/${req.url}`))
+})**/
+
+
 
 
 
