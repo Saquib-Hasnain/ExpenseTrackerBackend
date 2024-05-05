@@ -1,4 +1,6 @@
-async function signup(e) {
+
+
+const signup=async function signup(e) {
     try {
         e.preventDefault();
         console.log(e.target.email.value);
@@ -9,7 +11,7 @@ async function signup(e) {
             password: e.target.password.value
         }
         console.log(signupDetails)
-        const response = await axios.post("http://51.20.69.220:3000/user/signup", signupDetails)
+        const response = await axios.post("http://localhost:3000/user/signup", signupDetails)
         window.location.href = "./login.html"
 
 
@@ -20,3 +22,5 @@ async function signup(e) {
     }
 
 }
+const form = document.querySelector('form');
+    form.addEventListener('submit', signup);
