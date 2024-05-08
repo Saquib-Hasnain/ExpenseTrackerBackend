@@ -12,7 +12,7 @@ const login=async function login(e) {
         }
         
         console.log(loginDetails)
-        const response = await axios.post("https://51.20.177.197:3000/user/login", loginDetails)
+        const response = await axios.post("http://51.20.177.197:3000/user/login", loginDetails)
         alert(response.data.message)
         localStorage.setItem('token', response.data.token)
         window.location.href = "./expense.html"
