@@ -12,7 +12,7 @@ async function addNewExpense(e) {
             category: e.target.category.value,
         }
         const token = localStorage.getItem('token')
-        const response = await axios.post("https://51.20.177.197:3000/expense/addexpense", expenseDetails, { headers: { "Authorization": token } })
+        const response = await axios.post("http://51.20.177.197:3000/expense/addexpense", expenseDetails, { headers: { "Authorization": token } })
         addNewExpensetoUI(response.data.expense)
         e.target.expenseamount.value = '';
         e.target.description.value = '';
@@ -74,7 +74,7 @@ window.addEventListener("DOMContentLoaded", async () => {
             showPremiumuserMessage()
             showLeaderboard()
         }
-        const response = await axios.get(`https://51.20.177.197:3000/expense/getexpense?page=${page}`, { headers: { "Authorization": token } });
+        const response = await axios.get(`http://51.20.177.197:3000/expense/getexpense?page=${page}`, { headers: { "Authorization": token } });
 
         response.data.expenses.forEach(expense => {
             addNewExpensetoUI(expense)
@@ -108,7 +108,7 @@ function showLeaderboard() {
 
         const token = localStorage.getItem('token')
 
-        const userLeaderBoardArray = await axios.get('https://51.20.177.197:3000/premium/showLeaderBoard', { headers: { "Authorization": token } })
+        const userLeaderBoardArray = await axios.get('http://51.20.177.197:3000/premium/showLeaderBoard', { headers: { "Authorization": token } })
         console.log(userLeaderBoardArray)
 
         var leaderboardElem = document.getElementById('leaderboard')
@@ -125,7 +125,7 @@ function showLeaderboard() {
 
 async function urlLink() {
     const token = localStorage.getItem('token')
-    const downloadedLink = await axios.get('https://51.20.177.197:3000/premium/fileurl', { headers: { "Authorization": token } })
+    const downloadedLink = await axios.get('http://51.20.177.197:3000/premium/fileurl', { headers: { "Authorization": token } })
 
     var url = document.getElementById('urlLink')
     url.innerHTML += '<h1> Prevoius Expense List </h1>'
@@ -155,7 +155,7 @@ async function download() {
 }
 document.getElementById('rzp-button1').onclick = async function (e) {
     const token = localStorage.getItem('token')
-    const response = await axios.get('https://51.20.177.197:3000/purchase/premiummembership', { headers: { "Authorization": token } });
+    const response = await axios.get('http://51.20.177.197:3000/purchase/premiummembership', { headers: { "Authorization": token } });
     console.log(response)
 
     var options = {
@@ -186,7 +186,7 @@ document.getElementById('rzp-button1').onclick = async function (e) {
 }
 async function getProducts(page) {
     const token = localStorage.getItem('token')
-    const response = await axios.get(`https://51.20.177.197:3000/expense/getexpense?page=${page}`, { headers: { "Authorization": token } })
+    const response = await axios.get(`http://51.20.177.197:3000/expense/getexpense?page=${page}`, { headers: { "Authorization": token } })
 
 
     console.log(response)
