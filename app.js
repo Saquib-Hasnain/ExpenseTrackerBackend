@@ -13,30 +13,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 const helmet = require('helmet');
 
-app.use(helmet({
-  contentSecurityPolicy: {
-    directives: {
-      defaultSrc: ["'self'"], // Default fallback for most directives
-      scriptSrc: [
-        "'self'", 
-        "http://cdnjs.cloudflare.com", 
-        "https://checkout.razorpay.com", 
-        "https://api.razorpay.com" // Assuming Razorpay scripts are loaded from here
-      ],
-      frameSrc: [
-        "'self'", 
-        "https://api.razorpay.com" // Allow iframes from Razorpay
-      ],
-      connectSrc: [
-        "'self'", 
-        "https://api.razorpay.com" // Allow connections (AJAX, WebSockets) to Razorpay API
-        
-      ],
-      // Add other resource-specific directives as necessary
-    }
-  },
-  // Other Helmet configuration options...
-}));
+app.use(helmet();
 
 const bodyParser = require("body-parser");
 const sequelize = require("./util/database")
