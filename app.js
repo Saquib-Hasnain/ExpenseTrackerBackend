@@ -19,7 +19,7 @@ app.use(helmet({
       defaultSrc: ["'self'"], // Default fallback for most directives
       scriptSrc: [
         "'self'", 
-        "https://cdnjs.cloudflare.com", 
+        "http://cdnjs.cloudflare.com", 
         "https://checkout.razorpay.com", 
         "https://api.razorpay.com" // Assuming Razorpay scripts are loaded from here
       ],
