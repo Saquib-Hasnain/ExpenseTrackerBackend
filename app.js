@@ -13,7 +13,27 @@ const dotenv = require('dotenv');
 dotenv.config();
 const helmet = require('helmet');
 
-app.use(helmet())
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"], // Default fallback for most directives
+      scriptSrc: [
+        "'self'",
+        "http://cdnjs.cloudflare.com", // Notice HTTP being used here
+        "http://checkout.razorpay.com", // Not recommended for payment processing
+        "http://api.razorpay.com" // Not recommended
+      ],
+      frameSrc: [
+        "'self'",
+        "http://api.razorpay.com" // Not recommended for iframes
+      ],
+      connectSrc: [
+        "'self'",
+        "http://api.razorpay.com" // Not recommended for AJAX, WebSocket connections
+      ],
+    }
+  },
+}));
 
 const bodyParser = require("body-parser");
 const sequelize = require("./util/database")
