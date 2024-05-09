@@ -13,7 +13,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 const helmet = require('helmet');
 
-app.use(helmet();
+app.use(helmet())
 
 const bodyParser = require("body-parser");
 const sequelize = require("./util/database")
