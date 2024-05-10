@@ -12,7 +12,7 @@ async function addNewExpense(e) {
             category: e.target.category.value,
         }
         const token = localStorage.getItem('token')
-        const response = await axios.post("http://51.20.177.197/:3000/expense/addexpense", expenseDetails, { headers: { "Authorization": token } })
+        const response = await axios.post("http://51.20.177.197:3000/expense/addexpense", expenseDetails, { headers: { "Authorization": token } })
         addNewExpensetoUI(response.data.expense)
         e.target.expenseamount.value = '';
         e.target.description.value = '';
