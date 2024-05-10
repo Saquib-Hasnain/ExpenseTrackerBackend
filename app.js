@@ -7,7 +7,7 @@ const cors = require("cors")
 
 
 app.use(cors())
-
+app.options('*', cors());
 
 const dotenv = require('dotenv');
 dotenv.config();
