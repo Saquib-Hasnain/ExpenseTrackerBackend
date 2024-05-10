@@ -11,8 +11,11 @@ app.use(cors())
 
 const dotenv = require('dotenv');
 dotenv.config();
+//const helmet = require('helmet');
 
- 
+//app.use(helmet({
+ // contentSecurityPolicy:false 
+//}));
 
 const bodyParser = require("body-parser");
 const sequelize = require("./util/database")
@@ -39,11 +42,7 @@ app.use('/expense', expenseRouter)
 app.use('/purchase', purchaseRoutes)
 app.use('/premium', premiumFeatureRoutes)
 app.use('/password', forgetpasswordRoutes)
-/**app.use(express.static(path.join(__dirname, 'views'), {
-  index: false, // Prevent directory listing
-  extensions: ['html', 'js'] // Only serve .html or .js files
-}));**/
-app.use(express.static('views'));
+app.use(express.static(path.join(__dirname, 'views')))
 
 
 
